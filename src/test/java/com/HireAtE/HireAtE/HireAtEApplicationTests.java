@@ -1,0 +1,13 @@
+package com.HireAtE.HireAtE;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class HireAtEApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.HireAtE.Models.IndividualOnboardingEntity;
+import com.HireAtE.Response.APIResponseClass;
 import com.HireAtE.Service.IndividualOnboardingService;
 
 @RestController
@@ -25,8 +26,8 @@ public class IndividualOnboardingController {
 
 
      @PostMapping("/IndividualOnboarding")
-    public ResponseEntity<IndividualOnboardingEntity> registerCompany(@RequestBody IndividualOnboardingEntity company) {
-        IndividualOnboardingEntity registeredCompany = individualOnboardingservice.createOnboarding(company);
+    public ResponseEntity<APIResponseClass> registerCompany(@RequestBody IndividualOnboardingEntity company) {
+        APIResponseClass registeredCompany = individualOnboardingservice.createOnboarding(company);
         return new ResponseEntity<>(registeredCompany, HttpStatus.CREATED);
     }
 

@@ -3,8 +3,10 @@ package com.HireAtE.Service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.HireAtE.Models.IndividualOnboardingEntity;
 import com.HireAtE.Repository.IndividualOnboardingRepository;
+import com.HireAtE.Response.APIResponseClass;
 
 
 @Service
@@ -14,18 +16,20 @@ public class IndividualOnboardingService {
 
     
     // Create a new onboarding record
-    public IndividualOnboardingEntity createOnboarding(IndividualOnboardingEntity onboarding) {
+    public APIResponseClass createOnboarding(IndividualOnboardingEntity onboarding) {
 
          // Custom validation example: check if the CNIC already exists
          if (onboardingRepository.existsByCnic(onboarding.getCnic())) {
-            throw new IllegalArgumentException("A record with the same CNIC already exists.");
+            return new APIResponseClass("A record with the same CNIC already exists.", "10");
         }
 
         // Custom validation example: check if CGPA is within a valid range
         if (onboarding.getCgpa() < 0 || onboarding.getCgpa() > 4.0) {
-            throw new IllegalArgumentException("CGPA must be between 0.0 and 4.0.");
+            return new APIResponseClass("CGPA must be between 0.0 and 4.0.", "10");
         }
-        return onboardingRepository.save(onboarding);
+         onboardingRepository.save(onboarding);
+        return new APIResponseClass("Onboarding record created successfully!", "00");
+
     }
 
     // Get all onboarding records

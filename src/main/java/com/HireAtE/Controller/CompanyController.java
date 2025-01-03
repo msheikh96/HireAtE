@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.HireAtE.Models.CompanyOnboardingEntity;
+import com.HireAtE.Response.APIResponseClass;
 import com.HireAtE.Service.CompanyOnboardingService;
 
 @RestController
@@ -19,10 +20,11 @@ public class CompanyController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<CompanyOnboardingEntity> registerCompany(@RequestBody CompanyOnboardingEntity company) {
-        CompanyOnboardingEntity registeredCompany = companyService.registerCompany(company);
+    public ResponseEntity<APIResponseClass> registerCompany(@RequestBody CompanyOnboardingEntity company) {
+        APIResponseClass registeredCompany = companyService.registerCompany(company);
         return new ResponseEntity<>(registeredCompany, HttpStatus.CREATED);
     }
+    
     @GetMapping("/afnan")
     public String abc(){
         return "AFnan";

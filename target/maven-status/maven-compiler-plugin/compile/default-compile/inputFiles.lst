@@ -1,9 +1,14 @@
 /home/viper43/Capstone/HireAtE/src/main/java/com/HireAtE/Controller/CompanyController.java
 /home/viper43/Capstone/HireAtE/src/main/java/com/HireAtE/Controller/IndividualOnboardingController.java
+/home/viper43/Capstone/HireAtE/src/main/java/com/HireAtE/Controller/JobController.java
 /home/viper43/Capstone/HireAtE/src/main/java/com/HireAtE/HireAtEApplication.java
 /home/viper43/Capstone/HireAtE/src/main/java/com/HireAtE/Models/CompanyOnboardingEntity.java
 /home/viper43/Capstone/HireAtE/src/main/java/com/HireAtE/Models/IndividualOnboardingEntity.java
+/home/viper43/Capstone/HireAtE/src/main/java/com/HireAtE/Models/JobEntity.java
 /home/viper43/Capstone/HireAtE/src/main/java/com/HireAtE/Repository/CompanyOnboardingRepository.java
 /home/viper43/Capstone/HireAtE/src/main/java/com/HireAtE/Repository/IndividualOnboardingRepository.java
+/home/viper43/Capstone/HireAtE/src/main/java/com/HireAtE/Repository/JobRepository.java
+/home/viper43/Capstone/HireAtE/src/main/java/com/HireAtE/Response/APIResponseClass.java
 /home/viper43/Capstone/HireAtE/src/main/java/com/HireAtE/Service/CompanyOnboardingService.java
 /home/viper43/Capstone/HireAtE/src/main/java/com/HireAtE/Service/IndividualOnboardingService.java
+/home/viper43/Capstone/HireAtE/src/main/java/com/HireAtE/Service/JobService.java

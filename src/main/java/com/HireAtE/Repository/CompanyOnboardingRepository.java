@@ -7,7 +7,8 @@ import com.HireAtE.Models.CompanyOnboardingEntity;
 
 @Repository
 public interface CompanyOnboardingRepository extends JpaRepository<CompanyOnboardingEntity, Long> {
-    
+    boolean existsBycompanyName(String companyName);
+
 }
 
 

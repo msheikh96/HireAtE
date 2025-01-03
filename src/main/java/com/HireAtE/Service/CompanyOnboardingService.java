@@ -16,6 +16,9 @@ public class CompanyOnboardingService {
     }
 
     public CompanyOnboardingEntity registerCompany(CompanyOnboardingEntity company) {
+        if (companyRepository.existsBycompanyName(company.getCompanyName())) {
+            throw new IllegalArgumentException("A record with the same Company name already exists.");
+        }
         return companyRepository.save(company);
     }
 

@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.HireAtE.Models.JobApplicationEntity;
 import com.HireAtE.Models.JobEntity;
 import com.HireAtE.Response.APIResponseClass;
 import com.HireAtE.Service.JobService;
@@ -78,22 +79,23 @@ public class JobController {
     // Apply for a job
     @PostMapping("/apply/{jobId}")
     public ResponseEntity<APIResponseClass> applyForJob(@PathVariable Long jobId,
-            @RequestBody JobEntity jobApplication) {
-        Optional<JobEntity> job = jobService.getJobById(jobId);
+            @RequestBody JobApplicationEntity jobApplication) {
+        String responseMessage = jobService.applyForJob(jobApplication.getIndividual().getId(), jobId);
 
-        if (!job.isPresent()) {
-            return new ResponseEntity<>(new APIResponseClass("Job not found.", "404", null), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new APIResponseClass(responseMessage, "200", null), HttpStatus.OK);
+    }
+
+    @GetMapping("/applications/{individualId}/status/{status}")
+    public ResponseEntity<APIResponseClass> getApplicationsByStatus(@PathVariable Long individualId,
+            @PathVariable JobApplicationEntity.ApplicationStatus status) {
+        List<JobApplicationEntity> applications = jobService.getApplicationsByStatus(individualId, status);
+
+        if (applications.isEmpty()) {
+            return new ResponseEntity<>(new APIResponseClass("No applications found.", "404", null),
+                    HttpStatus.NOT_FOUND);
         }
-
-        // Process the application and update the job status
-        JobEntity jobEntity = job.get();
-        jobEntity.setApplicationMessage("CONGRATULATIONS! You have successfully applied for the position of " +
-                jobEntity.getJobTitle() + " at " + jobEntity.getCompanyName());
-
-        // Save updated job entity (application message added)
-        jobService.updateJob(jobEntity);
-
-        return new ResponseEntity<>(new APIResponseClass(jobEntity.getApplicationMessage(), "200", job), HttpStatus.OK);
+        return new ResponseEntity<>(new APIResponseClass("Applications retrieved successfully.", "200", applications),
+                HttpStatus.OK);
     }
 
 }

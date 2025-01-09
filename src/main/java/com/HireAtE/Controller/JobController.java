@@ -26,9 +26,9 @@ public class JobController {
     public ResponseEntity<APIResponseClass> getAllJobs() {
         List<JobEntity> jobs = jobService.getAllJobs();
         if (jobs.isEmpty()) {
-            return new ResponseEntity<>(new APIResponseClass("No jobs found.", "404"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new APIResponseClass("No jobs found.", "404", null), HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(new APIResponseClass("Jobs retrieved successfully.", "200"), HttpStatus.OK);
+        return new ResponseEntity<>(new APIResponseClass("Jobs retrieved successfully.", "200", jobs), HttpStatus.OK);
     }
 
     // Get jobs by category
@@ -36,10 +36,10 @@ public class JobController {
     public ResponseEntity<APIResponseClass> getJobsByCategory(@PathVariable String category) {
         List<JobEntity> jobs = jobService.getJobsByCategory(category);
         if (jobs.isEmpty()) {
-            return new ResponseEntity<>(new APIResponseClass("No jobs found in this category.", "404"),
+            return new ResponseEntity<>(new APIResponseClass("No jobs found in this category.", "404", null),
                     HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(new APIResponseClass("Jobs retrieved successfully.", "200"), HttpStatus.OK);
+        return new ResponseEntity<>(new APIResponseClass("Jobs retrieved successfully.", "200", jobs), HttpStatus.OK);
     }
 
     // Get jobs by city
@@ -47,10 +47,10 @@ public class JobController {
     public ResponseEntity<APIResponseClass> getJobsByCity(@PathVariable String city) {
         List<JobEntity> jobs = jobService.getJobsByCity(city);
         if (jobs.isEmpty()) {
-            return new ResponseEntity<>(new APIResponseClass("No jobs found in this city.", "404"),
+            return new ResponseEntity<>(new APIResponseClass("No jobs found in this city.", "404", null),
                     HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(new APIResponseClass("Jobs retrieved successfully.", "200"), HttpStatus.OK);
+        return new ResponseEntity<>(new APIResponseClass("Jobs retrieved successfully.", "200", jobs), HttpStatus.OK);
     }
 
     // Get jobs by company
@@ -58,10 +58,10 @@ public class JobController {
     public ResponseEntity<APIResponseClass> getJobsByCompany(@PathVariable String companyName) {
         List<JobEntity> jobs = jobService.getJobsByCompany(companyName);
         if (jobs.isEmpty()) {
-            return new ResponseEntity<>(new APIResponseClass("No jobs found for this company.", "404"),
+            return new ResponseEntity<>(new APIResponseClass("No jobs found for this company.", "404", null),
                     HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(new APIResponseClass("Jobs retrieved successfully.", "200"), HttpStatus.OK);
+        return new ResponseEntity<>(new APIResponseClass("Jobs retrieved successfully.", "200", jobs), HttpStatus.OK);
     }
 
     // Get details of a specific job by ID (for job description screen)
@@ -69,9 +69,9 @@ public class JobController {
     public ResponseEntity<APIResponseClass> getJobById(@PathVariable Long id) {
         Optional<JobEntity> job = jobService.getJobById(id);
         if (job.isPresent()) {
-            return new ResponseEntity<>(new APIResponseClass("Job retrieved successfully.", "200"), HttpStatus.OK);
+            return new ResponseEntity<>(new APIResponseClass("Job retrieved successfully.", "200", job), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(new APIResponseClass("Job not found.", "404"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new APIResponseClass("Job not found.", "404", null), HttpStatus.NOT_FOUND);
         }
     }
 
@@ -82,7 +82,7 @@ public class JobController {
         Optional<JobEntity> job = jobService.getJobById(jobId);
 
         if (!job.isPresent()) {
-            return new ResponseEntity<>(new APIResponseClass("Job not found.", "404"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new APIResponseClass("Job not found.", "404", null), HttpStatus.NOT_FOUND);
         }
 
         // Process the application and update the job status
@@ -93,6 +93,7 @@ public class JobController {
         // Save updated job entity (application message added)
         jobService.updateJob(jobEntity);
 
-        return new ResponseEntity<>(new APIResponseClass(jobEntity.getApplicationMessage(), "200"), HttpStatus.OK);
+        return new ResponseEntity<>(new APIResponseClass(jobEntity.getApplicationMessage(), "200", job), HttpStatus.OK);
     }
+
 }

@@ -18,11 +18,11 @@ public class CompanyOnboardingService {
 
     public APIResponseClass registerCompany(CompanyOnboardingEntity company) {
         if (companyRepository.existsBycompanyName(company.getCompanyName())) {
-            return new APIResponseClass("A record with the same Company name already exists.", "10");
+            return new APIResponseClass("A record with the same Company name already exists.", "10", null);
 
         }
          companyRepository.save(company);
-         return new APIResponseClass("Company Registered successfully!", "00");
+         return new APIResponseClass("Company Registered successfully!", "00", null);
 
     }
 

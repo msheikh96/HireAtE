@@ -20,15 +20,15 @@ public class IndividualOnboardingService {
 
          // Custom validation example: check if the CNIC already exists
          if (onboardingRepository.existsByCnic(onboarding.getCnic())) {
-            return new APIResponseClass("A record with the same CNIC already exists.", "10");
+            return new APIResponseClass("A record with the same CNIC already exists.", "10", null);
         }
 
         // Custom validation example: check if CGPA is within a valid range
         if (onboarding.getCgpa() < 0 || onboarding.getCgpa() > 4.0) {
-            return new APIResponseClass("CGPA must be between 0.0 and 4.0.", "10");
+            return new APIResponseClass("CGPA must be between 0.0 and 4.0.", "10", null);
         }
          onboardingRepository.save(onboarding);
-        return new APIResponseClass("Onboarding record created successfully!", "00");
+        return new APIResponseClass("Onboarding record created successfully!", "00", null);
 
     }
 

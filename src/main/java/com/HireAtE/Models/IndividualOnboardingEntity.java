@@ -29,6 +29,7 @@ public class IndividualOnboardingEntity {
     private String cnic;
     private String phoneNo;
     private String email;
+    private String password;
     private String educationLevel;
     private String degreeTitle;
     private String instituteName;

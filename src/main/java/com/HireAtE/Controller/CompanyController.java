@@ -24,6 +24,10 @@ public class CompanyController {
         APIResponseClass registeredCompany = companyService.registerCompany(company);
         return new ResponseEntity<>(registeredCompany, HttpStatus.CREATED);
     }
+
+     
+
+
     
     @GetMapping("/afnan")
     public String abc(){

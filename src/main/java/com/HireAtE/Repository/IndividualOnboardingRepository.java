@@ -9,4 +9,6 @@ import com.HireAtE.Models.IndividualOnboardingEntity;
 public interface IndividualOnboardingRepository extends JpaRepository<IndividualOnboardingEntity, Long> {
     // Define the custom query method to check if a CNIC exists
     boolean existsByCnic(String cnic);
+    IndividualOnboardingEntity findByEmail(String email);
+    
 }

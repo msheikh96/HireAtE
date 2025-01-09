@@ -21,40 +21,40 @@ public class IndividualOnboardingService {
 
         // Check if CNIC is not null or empty
     if (onboarding.getCnic() == null || onboarding.getCnic().trim().isEmpty()) {
-        return new APIResponseClass("CNIC cannot be empty.", "10");
+        return new APIResponseClass("CNIC cannot be empty.", "10",null);
     }
 
     // Custom validation example: check if the CNIC already exists
     if (onboardingRepository.existsByCnic(onboarding.getCnic())) {
-        return new APIResponseClass("A record with the same CNIC already exists.", "10");
+        return new APIResponseClass("A record with the same CNIC already exists.", "10",null);
     }
 
     // Check if name is not null or empty
     if (onboarding.getFirstName() == null || onboarding.getFirstName().trim().isEmpty()) {
-        return new APIResponseClass("First Name cannot be empty.", "10");
+        return new APIResponseClass("First Name cannot be empty.", "10",null);
     }
     if (onboarding.getLastName() == null || onboarding.getLastName().trim().isEmpty()) {
-        return new APIResponseClass("Last Name cannot be empty.", "10");
+        return new APIResponseClass("Last Name cannot be empty.", "10",null);
     }
 
     // Check if email is not null or empty
     if (onboarding.getEmail() == null || onboarding.getEmail().trim().isEmpty()) {
-        return new APIResponseClass("Email cannot be empty.", "10");
+        return new APIResponseClass("Email cannot be empty.", "10",null);
     }
 
     // Check if the date of birth (if applicable) is valid (example validation)
     if (onboarding.getDob() == null) {
-        return new APIResponseClass("Date of birth cannot be empty.", "10");
+        return new APIResponseClass("Date of birth cannot be empty.", "10",null);
     }
 
     // Example: If there is a phone number, check if it's valid (optional)
     if (onboarding.getPhoneNo() != null && !isValidPhoneNumber(onboarding.getPhoneNo())) {
-        return new APIResponseClass("Invalid phone number format.", "10");
+        return new APIResponseClass("Invalid phone number format.", "10",null);
     }
 
     // Validate email format using a simple regular expression
     if (!isValidEmail(onboarding.getEmail())) {
-        return new APIResponseClass("Invalid email format.", "10");
+        return new APIResponseClass("Invalid email format.", "10",null);
     }
          // Custom validation example: check if the CNIC already exists
          if (onboardingRepository.existsByCnic(onboarding.getCnic())) {
@@ -80,38 +80,38 @@ public class IndividualOnboardingService {
 
          // Validate email and password are not null or empty
     if (email == null || email.trim().isEmpty()) {
-        return new APIResponseClass("Email cannot be empty.", "10");
+        return new APIResponseClass("Email cannot be empty.", "10",null);
     }
 
     if (password == null || password.trim().isEmpty()) {
-        return new APIResponseClass("Password cannot be empty.", "10");
+        return new APIResponseClass("Password cannot be empty.", "10",null);
     }
 
     // Validate email format using a simple regular expression
     if (!isValidEmail(email)) {
-        return new APIResponseClass("Invalid email format.", "10");
+        return new APIResponseClass("Invalid email format.", "10",null);
     }
 
     // Validate password length (adjust length as per your requirement)
     if (password.length() < 6) {
-        return new APIResponseClass("Password must be at least 6 characters long.", "10");
+        return new APIResponseClass("Password must be at least 6 characters long.", "10",null);
     }
         IndividualOnboardingEntity user = onboardingRepository.findByEmail(email);
 
         if(user==null)
         {
-            return new APIResponseClass("User not found.", "10");
+            return new APIResponseClass("User not found.", "10",null);
 
         }
 
         if(password!=user.getPassword())
         {
 
-            return new APIResponseClass("Incorrect Password", "10");
+            return new APIResponseClass("Incorrect Password", "10",null);
 
         }
 
-        return new APIResponseClass("Login successful.", "00");
+        return new APIResponseClass("Login successful.", "00",null);
     }
 
     private boolean isValidEmail(String email) {

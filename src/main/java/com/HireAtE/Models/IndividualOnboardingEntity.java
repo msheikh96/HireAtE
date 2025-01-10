@@ -40,5 +40,13 @@ public class IndividualOnboardingEntity {
     private Integer totalExperience;
     private String currentPosition;
     private String JobExperience;
+    
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
 

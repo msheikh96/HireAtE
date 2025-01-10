@@ -25,7 +25,11 @@ public class CompanyController {
         return new ResponseEntity<>(registeredCompany, HttpStatus.CREATED);
     }
 
-     
+    @PostMapping("/UserLogin")
+    public ResponseEntity<APIResponseClass> UserLogin(@RequestBody CompanyOnboardingEntity company) {
+        APIResponseClass registeredCompany = companyService.UserLogin(company.getEmail(),company.getPassword());
+        return new ResponseEntity<>(registeredCompany, HttpStatus.CREATED);
+    }
 
 
     

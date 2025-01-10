@@ -60,6 +60,11 @@ public class IndividualOnboardingService {
          if (onboardingRepository.existsByCnic(onboarding.getCnic())) {
             return new APIResponseClass("A record with the same CNIC already exists.", "10", null);
         }
+        if(onboardingRepository.existsByEmail(onboarding.getEmail()))
+        {
+            return new APIResponseClass("A record with the same Email already exists.", "10", null);
+
+        }
 
         // Custom validation example: check if CGPA is within a valid range
         if (onboarding.getCgpa() < 0 || onboarding.getCgpa() > 4.0) {
@@ -104,7 +109,7 @@ public class IndividualOnboardingService {
 
         }
 
-        if(password!=user.getPassword())
+        if(!user.getPassword().equals(password))
         {
 
             return new APIResponseClass("Incorrect Password", "10",null);

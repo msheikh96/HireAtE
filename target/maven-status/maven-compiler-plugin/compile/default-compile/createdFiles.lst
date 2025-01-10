@@ -1,13 +1,17 @@
 com/HireAtE/Models/CompanyOnboardingEntity.class
 com/HireAtE/Models/IndividualOnboardingEntity.class
 com/HireAtE/HireAtEApplication.class
+com/HireAtE/Models/JobApplicationEntity$ApplicationStatus.class
+com/HireAtE/Service/JobApplicationService.class
 com/HireAtE/Controller/CompanyController.class
 com/HireAtE/Service/CompanyOnboardingService.class
 com/HireAtE/Repository/JobRepository.class
 com/HireAtE/Models/JobEntity.class
 com/HireAtE/Response/APIResponseClass.class
+com/HireAtE/Models/JobApplicationEntity.class
 com/HireAtE/Controller/IndividualOnboardingController.class
 com/HireAtE/Controller/JobController.class
+com/HireAtE/Repository/JobApplicationRepository.class
 com/HireAtE/Service/IndividualOnboardingService.class
 com/HireAtE/Config/CorsConfig.class
 com/HireAtE/Repository/IndividualOnboardingRepository.class

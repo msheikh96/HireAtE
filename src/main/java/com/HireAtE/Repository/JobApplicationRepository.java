@@ -23,5 +23,5 @@ public interface JobApplicationRepository extends JpaRepository<JobApplicationEn
     List<JobApplicationEntity> findByJobCity(String city);
 
     // Find applications by job company name
-    List<JobApplicationEntity> findByJobCompanyName(String companyName);
+    List<JobApplicationEntity> findByJob_Company_CompanyName(String companyName); // Updated method
 }

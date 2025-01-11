@@ -6,6 +6,8 @@ import com.HireAtE.Models.IndividualOnboardingEntity;
 import com.HireAtE.Repository.JobApplicationRepository;
 import com.HireAtE.Repository.JobRepository;
 import com.HireAtE.Repository.IndividualOnboardingRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -66,8 +68,13 @@ public class JobService {
     }
 
     // Get jobs by company name
-    public List<JobEntity> getJobsByCompany(String companyName) {
-        return jobRepository.findByCompanyName(companyName);
+    public List<JobEntity> getJobsByCompany(String company) {
+        return jobRepository.findJobsByCompanyName(company); // Corrected to match repository method
+    }
+
+    // Get jobs by category and city with pagination
+    public Page<JobEntity> getJobsByCategoryAndCity(String category, String city, Pageable pageable) {
+        return jobRepository.findByCategoryAndCity(category, city, pageable);
     }
 
     // Get details of a specific job by ID (for job description screen)
@@ -76,6 +83,3 @@ public class JobService {
         return jobRepository.findById(jobId);
     }
 }
-// JobService now handles applying for jobs. When a user applies for a job, the
-// job's application status is updated and a new job application record is
-// created in a separate table.

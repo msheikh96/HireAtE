@@ -19,10 +19,16 @@ public class JobApplicationEntity {
     @JoinColumn(name = "job_id")
     private JobEntity job;
 
+    @ManyToOne
+    @JoinColumn(name = "company_id") // New foreign key for company
+    private CompanyOnboardingEntity company; // This is the new reference to the company
+
     @Enumerated(EnumType.STRING)
     private ApplicationStatus applicationStatus;
 
     private String applicationMessage;
+    // Add CNIC to JobApplicationEntity
+    private String individualCnic; // CNIC of the individual applying for the job
 
     // Getters and Setters
 
@@ -40,6 +46,8 @@ public class JobApplicationEntity {
 
     public void setIndividual(IndividualOnboardingEntity individual) {
         this.individual = individual;
+        // Automatically set the CNIC when setting the individual
+        this.individualCnic = individual != null ? individual.getCnic() : null;
     }
 
     public JobEntity getJob() {
@@ -48,6 +56,14 @@ public class JobApplicationEntity {
 
     public void setJob(JobEntity job) {
         this.job = job;
+    }
+
+    public CompanyOnboardingEntity getCompany() {
+        return company;
+    }
+
+    public void setCompany(CompanyOnboardingEntity company) {
+        this.company = company;
     }
 
     public ApplicationStatus getApplicationStatus() {
@@ -66,12 +82,15 @@ public class JobApplicationEntity {
         this.applicationMessage = applicationMessage;
     }
 
+    public String getIndividualCnic() {
+        return individualCnic;
+    }
+
+    public void setIndividualCnic(String individualCnic) {
+        this.individualCnic = individualCnic;
+    }
+
     public enum ApplicationStatus {
         APPLIED, ACCEPTED, IN_REVIEW
     }
 }
-
-// This class connects IndividualOnboardingEntity and JobEntity.
-// applicationStatus can be APPLIED, ACCEPTED, or IN_REVIEW.
-// applicationMessage stores the message to be shown after applying for a job
-// (like "Congratulations, you've applied successfully").

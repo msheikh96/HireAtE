@@ -4,7 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
+import java.util.Optional;
 
 @Entity
 @Table(name = "job_entity")
@@ -13,22 +17,15 @@ public class JobEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String jobTitle;
     private String jobDescription;
     private String category;
     private String city;
-    private String companyName;
 
-        
-    // field to store application message
-
-    public String getApplicationMessage() {
-        return jobTitle;
-    }
-
-    public void setApplicationMessage(String jobTitle) {
-        this.jobTitle = jobTitle;
-    }
+    @ManyToOne
+    @JoinColumn(name = "company_id") // This will be the foreign key in the job_entity table
+    private CompanyOnboardingEntity company;
 
     // Getters and Setters
     public Long getId() {
@@ -71,11 +68,19 @@ public class JobEntity {
         this.city = city;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public CompanyOnboardingEntity getCompany() {
+        return company;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public void setCompany(CompanyOnboardingEntity company) {
+        this.company = company;
+    }
+
+    // Method to get company name directly from the associated
+    // CompanyOnboardingEntity
+    public String getCompanyName() {
+        return Optional.ofNullable(company)
+                .map(CompanyOnboardingEntity::getCompanyName)
+                .orElse(null);
     }
 }
